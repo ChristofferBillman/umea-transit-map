@@ -1,9 +1,14 @@
-import './App.css'
+import './styles/App.css'
 
-export default function App() {
+import Menu from './components/Menu'
+import Map from './components/Map'
+
+export default function App(): JSX.Element {
+
 	return (
 		<div className="App">
-
+			<Menu/>
+			<Map/>
 		</div>
 	)
 }

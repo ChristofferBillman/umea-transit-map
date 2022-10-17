@@ -1,0 +1,23 @@
+.menu-container {
+	background-color: var(--gray);
+	height: 100vh;
+	width: 400px;
+	position: absolute;
+	top: 0;
+	left: -400px;
+	z-index: 1;
+	transition-duration: 500ms;
+	transition-timing-function: cubic-bezier(0, .98, .28, .99);
+}
+
+.hamburger {
+	z-index: 2;
+}
+
+.closed {
+	left: -400px;
+}
+
+.open {
+	left: 0px;
+}
