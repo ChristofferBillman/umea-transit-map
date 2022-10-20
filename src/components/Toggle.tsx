@@ -1,10 +1,9 @@
-import { Dispatch, SetStateAction } from 'react'
 import '../styles/Toggle.css'
 
 interface IToggleProps {
 	color?: string,
 	enabled: boolean,
-	setEnabled: Dispatch<SetStateAction<boolean>>,
+	setEnabled: () => void,
 	label?: string
 }
 
@@ -17,7 +16,8 @@ export default function Toggle({color, enabled, setEnabled, label}: IToggleProps
 				<input
 					type="checkbox"
 					value={String(enabled)}
-					onChange={() => setEnabled(!enabled)}
+					defaultChecked={enabled}
+					onChange={setEnabled}
 				/>
 				<span className="slider round"/>
 			</label>
