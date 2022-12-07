@@ -8,6 +8,7 @@ import PrimaryLineIcon from '../img/primary-line-icon.svg'
 import SecondaryLineIcon from '../img/secondary-line-icon.svg'
 import TrainIcon from '../img/train-icon.svg'
 import HambugerIcon from '../img/hamburger.svg'
+import CrossIcon from '../img/cross-icon.svg'
 
 export default function Menu(): JSX.Element {
 
@@ -17,7 +18,7 @@ export default function Menu(): JSX.Element {
 		<>
 			<IconButton
 				className='hamburger'
-				icon={HambugerIcon}
+				icon={open ? CrossIcon : HambugerIcon}
 				onClick={() => {
 					console.log('hej!')
 					setOpen(!open)}}
@@ -35,6 +36,10 @@ export default function Menu(): JSX.Element {
 							<img src={PrimaryLineIcon}/>
 							<h4>Stomlinje</h4>
 						</div>
+						<p className='muted-text'>
+								En stomlinje är en linje som i regel går med högre frekvens än andra linjer.
+								Typiskt för dessa linjer är &gt; 6 avgångar i timmen vid rusningstrafik.
+						</p>
 
 						<div className='legend-item'>
 							<img src={SecondaryLineIcon}/>

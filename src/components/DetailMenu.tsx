@@ -1,8 +1,9 @@
 import '../styles/Menu.css'
 
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import IconButton from './IconButton'
 import CrossIcon from '../img/cross-icon.svg'
+import useFetch, { IFetchRequest } from '../hooks/useFetch'
 
 interface IDetailMenuProps {
 	open: boolean,
@@ -11,13 +12,26 @@ interface IDetailMenuProps {
 }
 
 export interface BusStopData {
+	id: string
 	name: string
+	info: string
+	linespassing: number[]
 }
 export default function DetailMenu({open, setOpen, busStop}: IDetailMenuProps): JSX.Element {
 
+	const [firstRender, setFirstRender] = useState(true)
+	const {data, loading, error}: IFetchRequest<any> = useFetch<any>('http://localhost/mockGET')
+
+	useEffect(() => {
+		setFirstRender(false)
+	},[])
+
 	useEffect(()=> {
+		if(firstRender) return
+
 		setOpen(true)
 	}, [busStop])
+
 	return (
 		<div className={`menu-container ${open ? 'open' : 'closed'}`} style={{zIndex: 3}}>
 			<div style={{padding: '20px'}}/>
@@ -27,7 +41,17 @@ export default function DetailMenu({open, setOpen, busStop}: IDetailMenuProps): 
 						icon={CrossIcon}
 						onClick={() => setOpen(false)}
 					/>
-					<h1 style={{wordBreak: 'break-all'}}>{busStop.name}</h1>
+					{loading ?
+						<p>Laddar...</p>
+						:
+						error ?
+							<p style={{marginTop: '64px'}}>Något gick fel.</p>
+							:
+							<>
+								<h1 style={{wordBreak: 'break-all'}}>{busStop.id}</h1>
+								{data[0].departs.map((departure: string, i: number) => <h2 key={i}>{departure}</h2>)}
+							</>
+					}
 				</div>
 			</div>
 		</div>

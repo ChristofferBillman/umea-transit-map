@@ -9,11 +9,13 @@ interface IIconButtonProps {
 }
 
 export default function IconButton({onClick, className, icon}: IIconButtonProps) {
+
 	return (
-		<img
-			src={icon === undefined ? HambugerIcon : icon}
-			className={'icon-button ' + className}
-			onClick={onClick}
-		/>
+		<div onClick={onClick}>
+			<img
+				src={icon === undefined ? HambugerIcon : icon}
+				className={'icon-button ' + className}
+			/>
+		</div>
 	)
 }

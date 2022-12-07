@@ -2,23 +2,27 @@ import './styles/App.css'
 import './styles/Type.css'
 
 import Menu from './components/Menu'
-import Map, { MapState } from './components/Map'
+import Map from './components/Map'
 import MapOptionsMenu from './components/MapOptionsMenu'
 
 import { useReducer, useState } from 'react'
 import { default as mapReducer } from './reducers/MapStateReducer'
 import { default as stopReducer} from './reducers/BusStopReducer'
+import { BusStopData } from './components/DetailMenu'
 import DetailMenu from './components/DetailMenu'
 
 const intialMapState = {
-	coloredLines: true,
+	lineColor: false,
 	water: true,
-	labels: true,
+	labels: false,
 	stops: true,
 	lineLabels: true,
 }
-const initalStopState = {
-	name: ''
+const initalStopState: BusStopData = {
+	id: 'unknown',
+	name: 'unknown',
+	info: 'unknown',
+	linespassing: [1]
 }
 
 export default function App(): JSX.Element {
