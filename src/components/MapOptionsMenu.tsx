@@ -8,6 +8,7 @@ import { MapState } from './Map'
 import { IMapStateAction, EMapStateKind } from '../reducers/MapStateReducer'
 
 import DisplayOptionsIcon from '../img/display-options.svg'
+import CrossIcon from '../img/cross-icon.svg'
 
 
 interface IRightMenuProps {
@@ -23,7 +24,7 @@ export default function MapOptionsMenu({mapState, dispatch}: IRightMenuProps): J
 		<>
 			<IconButton
 				className='icon'
-				icon={DisplayOptionsIcon}
+				icon={open ? CrossIcon : DisplayOptionsIcon}
 				onClick={() => {
 					setOpen(!open)}}
 			/>
@@ -34,6 +35,13 @@ export default function MapOptionsMenu({mapState, dispatch}: IRightMenuProps): J
 					<div>
 						<h1>Visningsalternativ</h1>
 
+						<h2>Linjer</h2>
+						<Toggle
+							enabled={mapState.lineColor}
+							setEnabled={() => dispatch({type: EMapStateKind.TOGGLE_LINECOLORS})}
+							label='Visa alla linjer i färg'
+						/>
+						<h2>Övrigt</h2>
 						<Toggle
 							enabled={mapState.water}
 							setEnabled={() => dispatch({type: EMapStateKind.TOGGLE_WATER})}

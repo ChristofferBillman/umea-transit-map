@@ -1,6 +1,16 @@
 :root {
 	--gray: #eeeeee;
 	--black: #282828;
+
+	--orange: #E5862F;
+	--red: #E52F2F;
+	--lime: #7FE52F;
+	--green: #37922F;
+	--yellow: #E9C400;
+	--blue: #2F78E5;
+	--cyan: #85DEDE;
+	--linegray: #C5C5C5;
+
 	--transition-function: cubic-bezier(0, .98, .28, .99);
 }
 
