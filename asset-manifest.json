@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4e93c1ff.css",
+    "main.js": "/static/js/main.09bff7f4.js",
+    "static/media/display-options.svg": "/static/media/display-options.7067c101fe149213213f4f480834be1a.svg",
+    "static/media/train-icon.svg": "/static/media/train-icon.4a3e9b14673f68ae5ca818f240bf49c8.svg",
+    "index.html": "/index.html",
+    "static/media/primary-line-icon.svg": "/static/media/primary-line-icon.ae85059a82331896f328d06572274cfd.svg",
+    "static/media/bus-stop-unidirectional-icon.svg": "/static/media/bus-stop-unidirectional-icon.338423ea00eccc8fe00e86bfeeb5de15.svg",
+    "static/media/bus-stop-icon.svg": "/static/media/bus-stop-icon.86050eb06e763add7ca1f427c436fb39.svg",
+    "static/media/cross-icon.svg": "/static/media/cross-icon.0379c40b7bc88240a983dc459a20e219.svg",
+    "static/media/hamburger.svg": "/static/media/hamburger.b48bc361a6ff3d95f00471e489006619.svg",
+    "main.4e93c1ff.css.map": "/static/css/main.4e93c1ff.css.map",
+    "main.09bff7f4.js.map": "/static/js/main.09bff7f4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4e93c1ff.css",
+    "static/js/main.09bff7f4.js"
+  ]
+}
