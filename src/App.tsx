@@ -12,7 +12,7 @@ import { BusStopData } from './components/DetailMenu'
 import DetailMenu from './components/DetailMenu'
 
 const intialMapState = {
-	lineColor: false,
+	lineColor: true,
 	water: true,
 	labels: false,
 	stops: true,

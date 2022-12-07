@@ -35,6 +35,19 @@
 .legend-item img {
 	margin-right: 16px;
 }
+.beta-text{
+	color: rgb(128, 128, 128);
+	font-weight: 900;
+	margin-top: -32px;
+	margin-bottom: 64px;
+}
+#christofferbillman{
+	font-weight: 700;
+	font-size: 1rem;
+}
+.vspace{
+	height: 32px;
+}
 
 .closed {
 	left: calc(-400px);

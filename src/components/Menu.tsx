@@ -29,22 +29,23 @@ export default function Menu(): JSX.Element {
 				<div className='menu-content-container'>
 					<div>
 						<h1>Umeå Lokaltrafik</h1>
+						<h2 className='beta-text'>Beta</h2>
 
 						<h2>Teckenförklaring</h2>
 
 						<div className='legend-item'>
 							<img src={PrimaryLineIcon}/>
-							<h4>Stomlinje</h4>
+							<h4>Busslinje</h4>
 						</div>
-						<p className='muted-text'>
+						{/*<p className='muted-text'>
 								En stomlinje är en linje som i regel går med högre frekvens än andra linjer.
 								Typiskt för dessa linjer är &gt; 6 avgångar i timmen vid rusningstrafik.
-						</p>
+						</p>*/}
 
-						<div className='legend-item'>
+						{/*<div className='legend-item'>
 							<img src={SecondaryLineIcon}/>
 							<h4>Sekundär linje</h4>
-						</div>
+						</div>*/}
 
 						<div className='legend-item'>
 							<img src={StopIcon}/>
@@ -75,8 +76,17 @@ export default function Menu(): JSX.Element {
 
 					<div>
 						<p className='muted-text'>
-						Umeås Lokaltrafik (Ultra) är ett samarbete mellan Länstrafiken i Västerbotten, Transdev och Umeå kommun.<br/><br/> Jag är inte anknuten, associerad, stödd eller på något sätt officiellt ansluten till Länstrafiken i Västerbotten, Transdev eller Umeå Kommun. För uppdaterade tidtabeller, trafikinformation och övrig information gällande resande i Umeås lokaltrafik, se tabussen.se.
+						Umeås Lokaltrafik (Ultra) är ett samarbete mellan Länstrafiken i Västerbotten, Transdev och Umeå kommun.<br/><br/> Jag är inte anknuten, associerad, stödd eller på något sätt officiellt ansluten till Länstrafiken i Västerbotten, Transdev eller Umeå Kommun. För uppdaterade tidtabeller, trafikinformation och övrig information gällande resande i Umeås lokaltrafik, se <a href="https://www.tabussen.nu/">tabussen.nu</a>.
 						</p>
+						
+						<div className='vspace'></div>
+
+						<a
+							href="https://christofferbillman.se"
+							id="christofferbillman"
+						>
+							christoferbillman.se
+						</a>
 					</div>
 				</div>
 			</div>

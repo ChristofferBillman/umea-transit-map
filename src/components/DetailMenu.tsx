@@ -11,6 +11,8 @@ interface IDetailMenuProps {
 	busStop: BusStopData
 }
 
+const PLACEHOLDER_TEXT = 'Denna funktion är inte tillgänglig ännu! Men kul att du kikar här ;)'
+
 export interface BusStopData {
 	id: string
 	name: string
@@ -45,7 +47,7 @@ export default function DetailMenu({open, setOpen, busStop}: IDetailMenuProps): 
 						<p>Laddar...</p>
 						:
 						error ?
-							<p style={{marginTop: '64px'}}>Något gick fel.</p>
+							<h2 style={{marginTop: '64px'}}>{PLACEHOLDER_TEXT}</h2>
 							:
 							<>
 								<h1 style={{wordBreak: 'break-all'}}>{busStop.id}</h1>
