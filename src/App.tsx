@@ -8,8 +8,9 @@ import MapOptionsMenu from './components/MapOptionsMenu'
 import { useReducer, useState } from 'react'
 import { default as mapReducer } from './reducers/MapStateReducer'
 import { default as stopReducer} from './reducers/BusStopReducer'
-import { BusStopData } from './components/DetailMenu'
+import BusStop from './types/BusStop'
 import DetailMenu from './components/DetailMenu'
+import ThemeContextProvider from './contexts/ThemeContext'
 
 const intialMapState = {
 	lineColor: true,
@@ -18,11 +19,16 @@ const intialMapState = {
 	stops: true,
 	lineLabels: true,
 }
-const initalStopState: BusStopData = {
-	id: 'unknown',
+const initalStopState: BusStop = {
 	name: 'unknown',
 	info: 'unknown',
-	linespassing: [1]
+	lines: [
+		{
+			name: 'unset',
+			nextStop: 'unset',
+			prevStop: 'unset'
+		}
+	]
 }
 
 export default function App(): JSX.Element {
@@ -34,22 +40,25 @@ export default function App(): JSX.Element {
 
 	return (
 		<div className="App">
-			<Menu/>
-			<DetailMenu
-				open={detailOpen}
-				setOpen={setDetailOpen}
-				busStop={currentStop}
-			/>
+			<ThemeContextProvider>
+				<Menu/>
+				<DetailMenu
+					open={detailOpen}
+					setOpen={setDetailOpen}
+					busStop={currentStop}
+				/>
 
-			<Map
-				mapState={mapState}
-				setStop={currentStopDispatch}
-			/>
+				<Map
+					mapState={mapState}
+					setStop={currentStopDispatch}
+					setDetailOpen={setDetailOpen}
+				/>
 
-			<MapOptionsMenu
-				mapState={mapState}
-				dispatch={mapStateDispatch}
-			/>
+				<MapOptionsMenu
+					mapState={mapState}
+					dispatch={mapStateDispatch}
+				/>
+			</ThemeContextProvider>
 		</div>
 	)
 }

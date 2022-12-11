@@ -1,0 +1,27 @@
+.linelist-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.trip-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trips-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chip-container {
+    border-radius: 5px;
+    padding: 10px 15px 10px 15px;
+    background-color: gray;
+}
+
+.chip-text {
+    color: white;
+    font-weight: 700;
+}

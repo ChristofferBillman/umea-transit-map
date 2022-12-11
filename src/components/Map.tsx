@@ -2,10 +2,12 @@ import '../styles/Map.css'
 
 import { Dispatch, useEffect, useRef, useState } from 'react'
 import { IStopStateAction, EStopStateKind } from '../reducers/BusStopReducer'
+import { useThemeContext } from '../contexts/ThemeContext'
 
 interface IMapProps {
 	mapState: MapState
 	setStop: Dispatch<IStopStateAction>
+	setDetailOpen: Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface MapState {
@@ -28,20 +30,13 @@ const mapStateIdMap = {
 // In ms
 const TRANSITION_DURATION = 500
 
-export default function Map({mapState, setStop}: IMapProps) {
+export default function Map({mapState, setStop, setDetailOpen}: IMapProps) {
 
 	const mapRef = useRef(null)
 
-	const docstyle = getComputedStyle(document.documentElement)
-	const [lineColors, setLineColors] = useState({
-		'1': docstyle.getPropertyValue('--red'),
-		'2': docstyle.getPropertyValue('--blue'),
-		'3': docstyle.getPropertyValue('--cyan'),
-		'5': docstyle.getPropertyValue('--orange'),
-		'7': docstyle.getPropertyValue('--green'),
-		'8': docstyle.getPropertyValue('--lime'),
-		'9': docstyle.getPropertyValue('--yellow')
-	})
+	const docstyle = getComputedStyle(document.documentElement) 
+	const themeContext = useThemeContext()
+	const [lineColors,setLineColors] = useState(themeContext.lineColors)
 
 	// Add svgPanZoom
 	// NOTE: External library, not controlled by react
@@ -81,15 +76,7 @@ export default function Map({mapState, setStop}: IMapProps) {
 
 	const toggleColors = () => {
 		if(mapState.lineColor === true){
-			setLineColors({
-				'1': docstyle.getPropertyValue('--red'),
-				'2': docstyle.getPropertyValue('--blue'),
-				'3': docstyle.getPropertyValue('--cyan'),
-				'5': docstyle.getPropertyValue('--orange'),
-				'7': docstyle.getPropertyValue('--green'),
-				'8': docstyle.getPropertyValue('--lime'),
-				'9': docstyle.getPropertyValue('--yellow')
-			})
+			setLineColors(themeContext.lineColors)
 		}
 		else {
 			setLineColors({
@@ -104,10 +91,13 @@ export default function Map({mapState, setStop}: IMapProps) {
 		}
 	}
 
-	const handleClick = (stopId: string) => setStop({
-		type: EStopStateKind.SET_STOP,
-		payload: stopId
-	})
+	const handleClick = (stopId: string) =>{
+		setStop({
+			type: EStopStateKind.SET_STOP,
+			payload: stopId
+		})
+		setDetailOpen(true)
+	}
 
 	function MasterSVG(mapRef: React.MutableRefObject<null>){
 		return (

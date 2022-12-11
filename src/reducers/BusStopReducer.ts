@@ -1,4 +1,6 @@
-import { BusStopData } from '../components/DetailMenu'
+import BusStop from '../types/BusStop'
+
+import { stops } from '../stops'
 
 export enum EStopStateKind {
 	SET_STOP,
@@ -9,14 +11,18 @@ export interface IStopStateAction {
 	payload: string
 }
 
-export default function StopStateReducer(state: BusStopData, action: IStopStateAction): BusStopData {
+export default function StopStateReducer(state: BusStop, action: IStopStateAction): BusStop {
 	switch(action.type) {
 	case EStopStateKind.SET_STOP:
+		for(const stop of stops) {
+			if(stop.name == action.payload) {
+				return stop
+			}
+		}
+		console.error('Error in BuStopReducer: Bus stop ' + action.payload + ' was not found.' )
 		return {
-			id: action.payload,
-			name: action.payload,
-			info: 'empty',
-			linespassing: [1]
+			...state,
+			name: 'NOT FOUND'
 		}
 	}
 }

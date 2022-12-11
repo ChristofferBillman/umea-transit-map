@@ -26,6 +26,7 @@ export default function useFetch<T>(url: string): IFetchRequest<T> {
 			.then(text => JSON.parse(text))
 			.then(data => setData(data))
 			.catch(err => setError(err))
+		console.log('fetched data!')
 	}, [url])
 
 	useEffect(() => {
