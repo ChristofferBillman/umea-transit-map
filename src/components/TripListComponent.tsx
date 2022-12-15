@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
 import useFetch, { IFetchRequest } from '../hooks/useFetch'
 import '../styles/linelist.css'
 
 import { ITrip } from '../types/Trip'
 import LineChip from './LineChip'
+import Spinner from './Spinner'
 
 interface ITripListComponentProps {
     from: string
@@ -27,27 +27,18 @@ export default function TripListComponent({from,to}: ITripListComponentProps) {
 	console.log(BASE_URL + `/api?from=${from}&to=${to}&time=${timeString}&date=${dateString}`)
 	const {data, loading, error}: IFetchRequest<ITrip[]> = useFetch<ITrip[]>(BASE_URL + `/api?from=${from}&to=${to}&time=${timeString}&date=${dateString}`)
 
-	return (
-		<>
-			{loading ?
-				<p style={{width: '100%'}}>Laddar...</p>
-				:
-				error ?
-					<>
-						<h2 style={{marginTop: '64px'}}>Något gick fel.</h2>
-					</>
-					:
-					<>
-						{data?.map((trip: ITrip) =>
-							<>
-								<div className='trip-container'>
-									<LineChip lineNumber={trip.line}/>
-									<p>{trip.departure}</p>
-								</div>
-							</>
-						)}
-					</>
-			}
-		</>
-	)
+	if(loading) return <Spinner/>
+
+	if(error) return <div style={{height: '32px'}}>
+		<p>Något gick fel.</p>
+	</div>
+
+	return <>
+		{data?.map((trip: ITrip) =>
+			<div key={trip.line + trip.departure} className='trip-container'>
+				<LineChip lineNumber={trip.line}/>
+				<p>{trip.departure}</p>
+			</div>
+		)}
+	</>
 }
