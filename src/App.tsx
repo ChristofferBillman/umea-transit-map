@@ -20,15 +20,10 @@ const intialMapState = {
 	lineLabels: true,
 }
 const initalStopState: BusStop = {
+	id: 3,
 	name: 'unknown',
 	info: 'unknown',
-	lines: [
-		{
-			name: 'unset',
-			nextStop: 'unset',
-			prevStop: 'unset'
-		}
-	]
+	lineIds: []
 }
 
 export default function App(): JSX.Element {

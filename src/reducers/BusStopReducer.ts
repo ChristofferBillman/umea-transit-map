@@ -1,6 +1,6 @@
 import BusStop from '../types/BusStop'
 
-import { stops } from '../stops'
+import { stops } from '../data/stops'
 
 export enum EStopStateKind {
 	SET_STOP,
@@ -22,7 +22,7 @@ export default function StopStateReducer(state: BusStop, action: IStopStateActio
 		console.error('Error in BuStopReducer: Bus stop ' + action.payload + ' was not found.' )
 		return {
 			...state,
-			name: 'NOT FOUND'
+			name: 'Något gick fel'
 		}
 	}
 }

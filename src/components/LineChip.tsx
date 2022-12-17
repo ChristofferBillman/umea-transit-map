@@ -1,7 +1,7 @@
 import { useThemeContext } from '../contexts/ThemeContext'
 
 interface ILineChipProps {
-	lineNumber: string
+	lineNumber: number
 }
 
 export default function LineChip({lineNumber}: ILineChipProps) {
