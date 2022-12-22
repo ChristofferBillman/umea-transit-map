@@ -24,7 +24,7 @@ export const lines: Line[] = [
 		linenumber: 5,
 		primary:  '5 mot Ersmark',
 		reverse: '5 mot Strömpilen',
-		stops: []
+		stops: [45,44,43,42,41,40,39,114,113,112,111,110,109,108,107,106,0,1,2,38,37,36,35,34,32,30,29,121,125,126,28,27,26,25,24,23,22,21,20]
 	},
 	{
 		linenumber: 7,
