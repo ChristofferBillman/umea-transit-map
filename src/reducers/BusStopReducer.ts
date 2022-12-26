@@ -1,6 +1,6 @@
 import BusStop from '../types/BusStop'
 
-import { stops } from '../data/stops'
+import { stops } from '../data/StopData'
 
 export enum EStopStateKind {
 	SET_STOP,

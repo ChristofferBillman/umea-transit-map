@@ -3,4 +3,5 @@ export interface ITrip {
 	arrival: string
 	travelTime: string
 	line: number
+	primary: boolean
 }

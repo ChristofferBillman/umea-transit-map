@@ -24,9 +24,11 @@ export default function Menu(): JSX.Element {
 					setOpen(!open)}}
 			/>
 
-			<div className={`menu-container ${open ? 'open' : 'closed'}`}>
-				<div style={{padding: '20px'}}/>
+			<div
+				className={`menu-container ${open ? 'open' : 'closed'}`}
+			>
 				<div className='menu-content-container'>
+					<div style={{padding: '20px'}}/>
 					<div>
 						<h1>Umeå Lokaltrafik</h1>
 						<h2 className='beta-text'>Beta</h2>

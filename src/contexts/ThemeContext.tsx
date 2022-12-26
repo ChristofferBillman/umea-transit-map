@@ -1,43 +1,73 @@
-import { createContext, useContext, useState } from 'react'
-
-interface IThemeContextProviderProps {
-		children: JSX.Element[],
-}
+import React, { createContext, useContext, useEffect, useState } from 'react'
 interface Theme {
-	lineColors: any
+	isDark: boolean
+	bg: string
+	text: string
+	slidercolor: string
+	water: string
+	lightbg: string
+	colors: string[]
+}
+const lineColors = [
+	'#C5C5C5',
+	'#E52F2F',
+	'#2F78E5',
+	'#85DEDE',
+	'#C5C5C5',
+	'#E5862F',
+	'#C5C5C5',
+	'#37922F',
+	'#7FE52F',
+	'#E9C400'
+]
+
+const darkTheme = {
+	isDark: true,
+	bg: '#282828',
+	lightbg: '#202020',
+	slidercolor: '#111',
+	water: '#323738',
+	text: '#EEE',
+	colors: lineColors
+}
+const lightTheme = {
+	isDark: false,
+	bg: '#EEE',
+	text: '#282828',
+	slidercolor: '#DDD',
+	water: '#EAF6F7',
+	lightbg: '#FFF',
+	colors: lineColors
 }
 
-const docstyle = getComputedStyle(document.documentElement)
+const ThemeContextState = createContext(lightTheme)
+const ThemeContextSetter = createContext<(dark: boolean) => void>(() => {/* eslint-moment */})
 
-const ThemeContext = createContext({} as Theme )
+export const useThemeContextState = () => {
+	return useContext(ThemeContextState)
+}
 
-export const useThemeContext = () => {
+export const useThemeContextSetter = () => {
+	return useContext(ThemeContextSetter)
+}
 
-	const context = useContext(ThemeContext)
+export const ThemeContextProvider = ({children}: React.PropsWithChildren) => {
+	const [theme, setTheme] = useState<Theme>(lightTheme)
 
-	if (context === undefined) {
-		throw new Error('ThemeContext must be used within a ThemeContextProvider')
+	const setDarkTheme = (dark: boolean): void => {
+		dark ? setTheme(darkTheme) : setTheme(lightTheme)
 	}
 
-	return context
-}
-
-export default function ThemeContextProvider({children}: IThemeContextProviderProps): any {
-	const [theme, setTheme] = useState({
-		lineColors: {
-			'1': docstyle.getPropertyValue('--red'),
-			'2': docstyle.getPropertyValue('--blue'),
-			'3': docstyle.getPropertyValue('--cyan'),
-			'5': docstyle.getPropertyValue('--orange'),
-			'7': docstyle.getPropertyValue('--green'),
-			'8': docstyle.getPropertyValue('--lime'),
-			'9': docstyle.getPropertyValue('--yellow')
+	useEffect(() => {
+		for(const [key,value] of Object.entries(theme)) {
+			document.documentElement.style.setProperty('--' + key, value)
 		}
-	})
+	},[theme])
 
-	return (
-		<ThemeContext.Provider value={theme}>
+	return <ThemeContextState.Provider value={theme}>
+		<ThemeContextSetter.Provider value={setDarkTheme}>
 			{children}
-		</ThemeContext.Provider>
-	)
+		</ThemeContextSetter.Provider>
+	</ThemeContextState.Provider>
 }
+

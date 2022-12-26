@@ -1,4 +1,5 @@
-import { useThemeContext } from '../contexts/ThemeContext'
+import { useThemeContextState } from '../contexts/ThemeContext'
+import '../styles/linelist.css'
 
 interface ILineChipProps {
 	lineNumber: number
@@ -6,9 +7,9 @@ interface ILineChipProps {
 
 export default function LineChip({lineNumber}: ILineChipProps) {
 
-	const themeContext = useThemeContext()
+	const ThemeContext = useThemeContextState()
 
-	return <div className='chip-container' style={{backgroundColor: themeContext.lineColors[lineNumber]}}>
+	return <div className='chip-container' style={{backgroundColor: ThemeContext.colors[lineNumber]}}>
 		<p className='chip-text'>{lineNumber}</p>
 	</div>
 }

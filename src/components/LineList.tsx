@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
-import useFetch, { IFetchRequest } from '../hooks/useFetch'
+
 import '../styles/linelist.css'
 
 import BusStop from '../types/BusStop'
-import Line from '../types/Line'
-import { ITrip } from '../types/Trip'
 import LineChip from './LineChip'
-
-import { lines } from '../data/lines'
-import { stops } from '../data/stops'
 import Spinner from './Spinner'
+
+import { ITrip } from '../types/Trip'
+
+import { lines } from '../data/LineData'
+import { stops } from '../data/StopData'
 
 interface ILineListProps {
     busStop: BusStop
@@ -20,8 +20,12 @@ const BASE_URL = 'http://localhost'
 export default function LineList({busStop}: ILineListProps) {
 
 	const time: Date = new Date()
-	const dateString: string = time.getFullYear() + '-' + time.getMonth() + '-' + time.getDate()
-	const timeString: string = time.getHours() + ':' + time.getMinutes()
+	const minutes = time.getMinutes()
+	const hours = time.getHours()
+
+	const timeString: string = + (hours < 10 ? hours + '0' : hours) + ':' + (minutes < 10 ? minutes + '0' : minutes) 
+
+	const dateString: string = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate()
 
 	const [departures, setDepartures] = useState<ITrip[]>([])
 	const [loading, setLoading] = useState<boolean>(true)
@@ -30,6 +34,7 @@ export default function LineList({busStop}: ILineListProps) {
 	// This is a damn mess...
 	const fetchAllDepartures = () => {
 		setLoading(true)
+		setDepartures([])
 		const tripRequests: Promise<Response>[] = []
 
 		for(const lineId of busStop.lineIds) {
@@ -66,47 +71,44 @@ export default function LineList({busStop}: ILineListProps) {
 		}
 
 		Promise.all(tripRequests)
-			.then(async response => {
-				const trips: ITrip[] = JSON.parse(await response[0].text())
-				
-				trips.sort((a,b) => {
-					const [hoursa,minutesa] = a.departure.split(':')
-					const [hoursb,minutesb] = b.departure.split(':')
+			.then(async responses => {
+				const orderedTrips: ITrip[][] = []
+				for(const response of responses) {
+					const test = await response.json()
 
-					if(hoursa < hoursb){
-						return -1
-					}
-					else {
-						if(minutesa < minutesb){
-							return -1
-						}
-						return 0
-					}
-				})
-				console.log(trips)
+					orderedTrips.push(test)
+				}
+
+				// Every other array is in the opposite direction.
+				for(let i = 0; i < orderedTrips.length; i++) {
+					orderedTrips[i].forEach(trip => trip.primary = i%2 == 0)
+				}
+
+				const allTrips = orderedTrips.flat()
+				allTrips.sort((a,b) => a.departure.localeCompare(b.departure))
+
 				setError(false)
 				setLoading(false)
-				setDepartures(trips)
+				setDepartures(allTrips)
 			})
 			.catch(err => {
+				console.error(err)
 				setError(true)
 				setLoading(false)
-			}) 
+			})
 	}
 
 	const fetchTrip = async (from: BusStop, to: BusStop) => {
+		const fromQuery = from.name.replace(' ','+')
+		const toQuery = to.name.replace(' ','+')
 		return fetch(BASE_URL + `/api?
-			from=${from.name}&
-			to=${to.name}&
+			from=${fromQuery}&
+			to=${toQuery}&
 			time=${timeString}&
-			date=${dateString}`)
+			date=${dateString}`,{mode: 'cors'})
 	}
 
 	useEffect(() => fetchAllDepartures(), [busStop])
-
-	const getCurrentLines = (): Line[] => {
-		return lines.filter(line => busStop.lineIds.includes(line.linenumber))
-	}
 
 	if(loading) return <div style={{
 		width: '100%',
@@ -125,16 +127,21 @@ export default function LineList({busStop}: ILineListProps) {
 		alignItems: 'center',
 		justifyContent: 'center'
 	}}>
-		<h2>Något gick fel. Försök igen.</h2>
+		<h2>Kunde inte hämta avgångar.</h2>
 	</div>
 
+	let index = 0
 	// Information about a trip's direction is not avaliable here. Needs to be.
 	return <div className='trips-container'>
 		{departures.map(departure => {
-			return <div key={Date.now()} className='trip-container'>
-				<LineChip lineNumber={departure.line}/>
-				<h2>{lines.find(line => departure.line == line.linenumber)?.primary}</h2>
-				<p>{departure.departure}</p>
+			index++
+			const currentLine = lines.find(line => departure.line == line.linenumber)
+			return <div key={index} className='trip-container'>
+				<div style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
+					<LineChip lineNumber={departure.line}/>
+					<p>{departure.primary ? currentLine?.primary : currentLine?.reverse}</p>
+				</div>
+				<h2>{departure.departure}</h2>
 			</div>
 		})}
 	</div>

@@ -1,0 +1,17 @@
+.line{
+    position: relative;
+    height: 62px;
+    width: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+    background-color: gray;
+}
+.stop {
+    position: absolute;
+    background-color: white;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    top: 45%;
+    left: 1px;
+}

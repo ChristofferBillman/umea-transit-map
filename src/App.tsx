@@ -10,7 +10,8 @@ import { default as mapReducer } from './reducers/MapStateReducer'
 import { default as stopReducer} from './reducers/BusStopReducer'
 import BusStop from './types/BusStop'
 import DetailMenu from './components/DetailMenu'
-import ThemeContextProvider from './contexts/ThemeContext'
+
+import { ThemeContextProvider } from './contexts/ThemeContext'
 
 const intialMapState = {
 	lineColor: true,

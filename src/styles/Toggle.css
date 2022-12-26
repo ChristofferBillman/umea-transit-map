@@ -20,7 +20,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: #ccc;
+	background-color: var(--slidercolor);
 	-webkit-transition-duration: 400ms;
 	transition-duration: 400ms;
 	-webkit-transition-timing-function: var(--transition-function);
