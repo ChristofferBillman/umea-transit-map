@@ -43,5 +43,17 @@ export const lines: Line[] = [
 		primary:  'mot Röbäck',
 		reverse: 'mot Carlshöjd',
 		stops: [67, 68, 69, 70, 71, 72, 73, 74, 76, 77, 78, 79, 105, 104, 103, 0, 106, 107, 108, 109, 110, 111, 80, 81, 82, 83, 42, 84, 85, 86  ]
+	},
+	{
+		linenumber: 72,
+		primary:  'mot Umedalen',
+		reverse: 'mot Universitetet',
+		stops: []
+	},
+	{
+		linenumber: 75,
+		primary:  'mot Innertavle',
+		reverse: 'mot Vasaplan',
+		stops: []
 	}
 ]
