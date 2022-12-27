@@ -1,6 +1,7 @@
 :root {
-	--gray: #eeeeee;
-	--black: #282828;
+	--bg: #eeeeee;
+	--text: #282828;
+	--lightbg: #ccc
 
 	--orange: #E5862F;
 	--red: #E52F2F;

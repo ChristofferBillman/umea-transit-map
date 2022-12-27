@@ -5,7 +5,6 @@ import IconButton from './IconButton'
 import StopIcon from '../img/bus-stop-icon.svg'
 import UnidirectStopIcon from '../img/bus-stop-unidirectional-icon.svg'
 import PrimaryLineIcon from '../img/primary-line-icon.svg'
-import SecondaryLineIcon from '../img/secondary-line-icon.svg'
 import TrainIcon from '../img/train-icon.svg'
 import HambugerIcon from '../img/hamburger.svg'
 import CrossIcon from '../img/cross-icon.svg'
@@ -24,9 +23,11 @@ export default function Menu(): JSX.Element {
 					setOpen(!open)}}
 			/>
 
-			<div className={`menu-container ${open ? 'open' : 'closed'}`}>
-				<div style={{padding: '20px'}}/>
+			<div
+				className={`menu-container ${open ? 'open' : 'closed'}`}
+			>
 				<div className='menu-content-container'>
+					<div style={{padding: '20px'}}/>
 					<div>
 						<h1>Umeå Lokaltrafik</h1>
 						<h2 className='beta-text'>Beta</h2>
@@ -79,7 +80,7 @@ export default function Menu(): JSX.Element {
 						Umeås Lokaltrafik (Ultra) är ett samarbete mellan Länstrafiken i Västerbotten, Transdev och Umeå kommun.<br/><br/> Jag är inte anknuten, associerad, stödd eller på något sätt officiellt ansluten till Länstrafiken i Västerbotten, Transdev eller Umeå Kommun. För uppdaterade tidtabeller, trafikinformation och övrig information gällande resande i Umeås lokaltrafik, se <a href="https://www.tabussen.nu/">tabussen.nu</a>.
 						</p>
 						
-						<div className='vspace'></div>
+						<div className='vspace'/>
 
 						<a
 							href="https://christofferbillman.se"
@@ -87,6 +88,9 @@ export default function Menu(): JSX.Element {
 						>
 							christoferbillman.se
 						</a>
+
+						<div className='vspace'/>
+						<div className='vspace'/>
 					</div>
 				</div>
 			</div>

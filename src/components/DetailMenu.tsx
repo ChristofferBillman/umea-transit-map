@@ -3,26 +3,18 @@ import '../styles/Menu.css'
 import {useEffect, useState} from 'react'
 import IconButton from './IconButton'
 import CrossIcon from '../img/cross-icon.svg'
-import useFetch, { IFetchRequest } from '../hooks/useFetch'
+import BusStop from '../types/BusStop'
+import LineList from './LineList'
+import NotYetImplemented from './NotYetImplemented'
 
 interface IDetailMenuProps {
 	open: boolean,
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-	busStop: BusStopData
+	busStop: BusStop
 }
 
-const PLACEHOLDER_TEXT = 'Denna funktion är inte tillgänglig ännu! Men kul att du kikar här ;)'
-
-export interface BusStopData {
-	id: string
-	name: string
-	info: string
-	linespassing: number[]
-}
 export default function DetailMenu({open, setOpen, busStop}: IDetailMenuProps): JSX.Element {
-
 	const [firstRender, setFirstRender] = useState(true)
-	const {data, loading, error}: IFetchRequest<any> = useFetch<any>('http://localhost/mockGET')
 
 	useEffect(() => {
 		setFirstRender(false)
@@ -36,24 +28,23 @@ export default function DetailMenu({open, setOpen, busStop}: IDetailMenuProps): 
 
 	return (
 		<div className={`menu-container ${open ? 'open' : 'closed'}`} style={{zIndex: 3}}>
+			<IconButton
+				icon={CrossIcon}
+				onClick={() => setOpen(false)}
+				className='close-detail'
+			/>
+
 			<div style={{padding: '20px'}}/>
 			<div className='menu-content-container'>
 				<div>
-					<IconButton
-						icon={CrossIcon}
-						onClick={() => setOpen(false)}
-					/>
-					{loading ?
-						<p>Laddar...</p>
-						:
-						error ?
-							<h2 style={{marginTop: '64px'}}>{PLACEHOLDER_TEXT}</h2>
-							:
-							<>
-								<h1 style={{wordBreak: 'break-all'}}>{busStop.id}</h1>
-								{data[0].departs.map((departure: string, i: number) => <h2 key={i}>{departure}</h2>)}
-							</>
-					}
+					<div style={{height: '32px'}}/>
+					<div style={{display: 'flex', alignItems: 'center'}}>
+						<h2>{busStop.name}</h2>
+						<p>{busStop.id}</p>
+					</div>
+					<p>{busStop.info}</p>
+					<NotYetImplemented/>
+					{/*<LineList busStop={busStop}/>*/}
 				</div>
 			</div>
 		</div>
