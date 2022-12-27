@@ -30,9 +30,9 @@ const initalStopState: BusStop = {
 export default function App(): JSX.Element {
 
 	const [mapState, mapStateDispatch] = useReducer(mapReducer, intialMapState)
+	const [currentStop, currentStopDispatch] = useReducer(stopReducer, initalStopState)
 
 	const [detailOpen, setDetailOpen] = useState(false)
-	const [currentStop, currentStopDispatch] = useReducer(stopReducer, initalStopState)
 
 	return (
 		<div className="App">

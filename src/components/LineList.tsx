@@ -32,14 +32,18 @@ export default function LineList({busStop}: ILineListProps) {
 	const [error, setError] = useState<boolean>(false)
 
 	// This is a damn mess...
+	// Nothing wrong with the logic. What's wrong is it searches a journey from previous stop to next.
+	// This causes problems when lines are parallell to each other as two different fetches can return
+	// the same trips. Instead of searching journey from next stop and previous,
+	// search journey from current stop, to the next/prev unique stop on the line.
 	const fetchAllDepartures = () => {
+		console.log('fetching departures...')
 		setLoading(true)
 		setDepartures([])
 		const tripRequests: Promise<Response>[] = []
 
 		for(const lineId of busStop.lineIds) {
 			const currentLine = lines.find(line => line.linenumber === lineId)
-
 			if(!currentLine) throw new Error('Could not find line with linenumber ' + lineId)
 
 			// -1: not found

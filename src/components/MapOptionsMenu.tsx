@@ -38,6 +38,8 @@ export default function MapOptionsMenu({mapState, dispatch}: IRightMenuProps): J
 				<div className='right-menu-content-container'>
 					<div>
 						<h1>Visningsalternativ</h1>
+						
+						<h2>Tema</h2>
 						<Toggle
 							enabled={themeContext.isDark}
 							setEnabled={() => setTheme(!themeContext.isDark)}

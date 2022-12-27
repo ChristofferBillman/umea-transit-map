@@ -45,7 +45,15 @@ export default function Map({mapState, setStop, setDetailOpen}: IMapProps) {
 			beforePan: limitPan
 		})
 	},[])
-
+	
+	const toggleColors = () => {
+		if(mapState.lineColor === true){
+			// Nothing rn
+		}
+		else {
+			// nothing rn
+		}
+	}
 	// On mapState change
 	// Loops through all members in mapState,
 	// and toggles visibility of the corresponding map layer.
@@ -72,15 +80,6 @@ export default function Map({mapState, setStop, setDetailOpen}: IMapProps) {
 		})
 	}, [mapState])
 
-	const toggleColors = () => {
-		if(mapState.lineColor === true){
-			// Nothing rn
-		}
-		else {
-			// nothing rn
-		}
-	}
-
 	const handleClick = (stopId: string) =>{
 		setStop({
 			type: EStopStateKind.SET_STOP,
@@ -89,8 +88,6 @@ export default function Map({mapState, setStop, setDetailOpen}: IMapProps) {
 		setDetailOpen(true)
 	}
 
-	// style={{transitionDuration: TRANSITION_DURATION + 'ms'}}
-	//
 	function MasterSVG(mapRef: React.MutableRefObject<null>){
 		return (
 			<svg

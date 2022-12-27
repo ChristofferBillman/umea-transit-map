@@ -18,7 +18,7 @@ export default function IconButton({onClick, className, icon}: IIconButtonProps)
 			<img
 				src={icon === undefined ? HambugerIcon : icon}
 				className={'icon-button ' + className}
-				style={ThemeContext.isDark ? {filter: 'brightness(500%)'} : {filter: 'none'}}
+				style={ThemeContext.isDark ? {filter: 'brightness(600%)'} : {filter: 'none'}}
 			/>
 		</div>
 	)
