@@ -32,10 +32,8 @@ export default function LineList({busStop}: ILineListProps) {
 	const [error, setError] = useState<boolean>(false)
 
 	// This is a damn mess...
-	// Nothing wrong with the logic. What's wrong is it searches a journey from previous stop to next.
-	// This causes problems when lines are parallell to each other as two different fetches can return
-	// the same trips. Instead of searching journey from next stop and previous,
-	// search journey from current stop, to the next/prev unique stop on the line.
+	// Edge cases still exist, eg. line 5s last stop in some journeys is gnejsvägen, not tegelbruksvägen.
+	// That journey will just not show up.
 	const fetchAllDepartures = () => {
 		console.log('fetching departures...')
 		setLoading(true)
@@ -51,9 +49,9 @@ export default function LineList({busStop}: ILineListProps) {
 
 			if(stopIndex !== -1){
 
-				const nextStopIndex = stopIndex + 1
-
-				const nextStop = stops.find(stop => stop.id === currentLine.stops[nextStopIndex])
+				//const nextStopIndex = stopIndex + 1
+				const lastStopId = currentLine.stops[currentLine.stops.length-1]
+				const nextStop = stops.find(stop => stop.id === lastStopId)
 
 				if(nextStop !== undefined) {
 					const direction1 = fetchTrip(busStop,nextStop)
@@ -63,9 +61,10 @@ export default function LineList({busStop}: ILineListProps) {
 
 			if(stopIndex !== -1) {
 
-				const prevStopIndex = stopIndex - 1
+				//const prevStopIndex = stopIndex - 1
+				const firstStopId = currentLine.stops[0]
 
-				const prevStop = stops.find(stop => stop.id === currentLine.stops[prevStopIndex])
+				const prevStop = stops.find(stop => stop.id === firstStopId)
 
 				if(prevStop !== undefined) {
 					const direction2 = fetchTrip(busStop, prevStop)
@@ -137,6 +136,7 @@ export default function LineList({busStop}: ILineListProps) {
 	let index = 0
 	// Information about a trip's direction is not avaliable here. Needs to be.
 	return <div className='trips-container'>
+		<h2>Avgångar</h2>
 		{departures.map(departure => {
 			index++
 			const currentLine = lines.find(line => departure.line == line.linenumber)
