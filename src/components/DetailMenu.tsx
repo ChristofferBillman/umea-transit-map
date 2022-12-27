@@ -4,9 +4,8 @@ import {useEffect, useState} from 'react'
 import IconButton from './IconButton'
 import CrossIcon from '../img/cross-icon.svg'
 import BusStop from '../types/BusStop'
-import LineChip from './LineChip'
-import LineStopList from './LineStopList'
 import LineList from './LineList'
+import NotYetImplemented from './NotYetImplemented'
 
 interface IDetailMenuProps {
 	open: boolean,
@@ -44,7 +43,8 @@ export default function DetailMenu({open, setOpen, busStop}: IDetailMenuProps): 
 						<p>{busStop.id}</p>
 					</div>
 					<p>{busStop.info}</p>
-					<LineList busStop={busStop}/>
+					<NotYetImplemented/>
+					{/*<LineList busStop={busStop}/>*/}
 				</div>
 			</div>
 		</div>
