@@ -17,7 +17,7 @@ export default function LineStopList({lineId}: ILineStopListProps): JSX.Element 
 		{currentLine?.stops.map((stopId: number) =>{
 			const currentStop = Stops.getStopById(stopId)
 			return <div key={stopId} style={{display: 'flex'}}>
-				<div className='line' style={{backgroundColor: themeContext.colors[currentLine.linenumber]}}>
+				<div className='line' style={{backgroundColor: themeContext.colors.get(currentLine.linenumber)}}>
 					<div className='stop'/>
 				</div>
 				<h3>{currentStop?.name}</h3>

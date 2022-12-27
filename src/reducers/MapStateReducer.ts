@@ -5,7 +5,7 @@ export enum EMapStateKind {
 	TOGGLE_LABELS,
 	TOGGLE_STOPS,
 	TOGGLE_LINELABELS,
-	TOGGLE_LINECOLORS
+	//TOGGLE_LINECOLORS
 }
 
 export interface IMapStateAction {
@@ -14,6 +14,7 @@ export interface IMapStateAction {
 }
 
 export default function MapStateReducer(state: MapState, action: IMapStateAction) {
+
 	switch(action.type) {
 	case EMapStateKind.TOGGLE_WATER:
 		return {
@@ -34,11 +35,6 @@ export default function MapStateReducer(state: MapState, action: IMapStateAction
 		return {
 			...state,
 			lineLabels: !state.lineLabels,
-		}
-	case EMapStateKind.TOGGLE_LINECOLORS:
-		return {
-			...state,
-			lineColor: !state.lineColor,
 		}
 	}
 }

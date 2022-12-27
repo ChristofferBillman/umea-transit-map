@@ -14,7 +14,7 @@ import DetailMenu from './components/DetailMenu'
 import { ThemeContextProvider } from './contexts/ThemeContext'
 
 const intialMapState = {
-	lineColor: true,
+	//lineColor: true,
 	water: true,
 	labels: false,
 	stops: true,

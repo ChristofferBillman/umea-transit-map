@@ -11,7 +11,6 @@ import DisplayOptionsIcon from '../img/display-options.svg'
 import CrossIcon from '../img/cross-icon.svg'
 import { useThemeContextSetter, useThemeContextState } from '../contexts/ThemeContext'
 
-
 interface IRightMenuProps {
 	mapState: MapState,
 	dispatch: React.Dispatch<IMapStateAction>
@@ -42,14 +41,14 @@ export default function MapOptionsMenu({mapState, dispatch}: IRightMenuProps): J
 						<h2>Tema</h2>
 						<Toggle
 							enabled={themeContext.isDark}
-							setEnabled={() => setTheme(!themeContext.isDark)}
+							setEnabled={() => setTheme(!themeContext.isDark ? 'dark' : 'light')}
 							label='Mörkt läge'
 						/>
 
 						<h2>Linjer</h2>
 						<Toggle
-							enabled={mapState.lineColor}
-							setEnabled={() => dispatch({type: EMapStateKind.TOGGLE_LINECOLORS})}
+							enabled={true}
+							setEnabled={() => setTheme('toggleLineColors')}
 							label='Visa alla linjer i färg'
 						/>
 						<Toggle
