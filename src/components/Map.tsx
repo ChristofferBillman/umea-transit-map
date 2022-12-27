@@ -50,12 +50,7 @@ export default function Map({mapState, setStop, setDetailOpen}: IMapProps) {
 	useEffect(() => {
 		const map = mapRef.current
 		
-		Object.keys(mapState).forEach((key,index) => {
-
-			/*if(key === 'lineColor'){
-				dispatch
-				return
-			}*/
+		Object.keys(mapState).forEach(key => {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			//@ts-ignore
 			const svgLayer = map.getElementById(mapStateIdMap[key])
@@ -794,11 +789,10 @@ export default function Map({mapState, setStop, setDetailOpen}: IMapProps) {
 // Function stolen from example:
 // https://github.com/bumbu/svg-pan-zoom/blob/master/demo/limit-pan.html
 function limitPan(oldPan: { x: number; y: number }, newPan: { x: number; y: number }) {
-	const stopHorizontal = false
-		, stopVertical = false
+	const
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		//@ts-ignore
-		, sizes = this.getSizes()
+		sizes = this.getSizes()
 		// - 400 bc of left menu
 		, gutterWidth = sizes.width - 400
 		, gutterHeight = sizes.height
