@@ -25,7 +25,8 @@ export default function LineList({busStop}: ILineListProps) {
 
 	const timeString: string = + (hours < 10 ? hours + '0' : hours) + ':' + (minutes < 10 ? minutes + '0' : minutes) 
 
-	const dateString: string = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate()
+	const month = time.getMonth() + 1
+	const dateString: string = time.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-' + time.getDate()
 
 	const [departures, setDepartures] = useState<ITrip[]>([])
 	const [loading, setLoading] = useState<boolean>(true)
@@ -137,6 +138,7 @@ export default function LineList({busStop}: ILineListProps) {
 	// Information about a trip's direction is not avaliable here. Needs to be.
 	return <div className='trips-container'>
 		<h2>Avgångar</h2>
+		<p>Dessa avgångar är planerade avgångar. Faktiskt avgångstid kan avvika med ± 3 min.</p>
 		{departures.map(departure => {
 			index++
 			const currentLine = lines.find(line => departure.line == line.linenumber)

@@ -67,20 +67,18 @@ export default function Menu(): JSX.Element {
 						</div>
 
 						<div className='legend-item'>
-							<div style={{width: '124px'}}/>
 							<div>
 								<h4>Nygatan**</h4>
 								<p className='muted-text'>I riktning mot Umeå centrum, trafikeras ej 12 - 19 alla dagar</p>
 							</div>
 						</div>
+						<div className='vspace-4'/>
 					</div>
 
 					<div>
 						<p className='muted-text'>
 						Umeås Lokaltrafik (Ultra) är ett samarbete mellan Länstrafiken i Västerbotten, Transdev och Umeå kommun.<br/><br/> Jag är inte anknuten, associerad, stödd eller på något sätt officiellt ansluten till Länstrafiken i Västerbotten, Transdev eller Umeå Kommun. För uppdaterade tidtabeller, trafikinformation och övrig information gällande resande i Umeås lokaltrafik, se <a href="https://www.tabussen.nu/">tabussen.nu</a>.
 						</p>
-						
-						<div className='vspace'/>
 
 						<a
 							href="https://christofferbillman.se"

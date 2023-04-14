@@ -43,8 +43,8 @@ export default function DetailMenu({open, setOpen, busStop}: IDetailMenuProps): 
 						<p>{busStop.id}</p>
 					</div>
 					<p>{busStop.info}</p>
-					<NotYetImplemented/>
-					{/*<LineList busStop={busStop}/>*/}
+					{/*<NotYetImplemented/>*/}
+					<LineList busStop={busStop}/>
 				</div>
 			</div>
 		</div>
